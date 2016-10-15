@@ -1,6 +1,6 @@
 {
   "name": "generate-thumbnail",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Using ffmpeg generate thumbnail from video file",
   "main": "index.js",
   "bin": {
