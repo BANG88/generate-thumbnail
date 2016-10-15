@@ -1,0 +1,29 @@
+{
+  "name": "generate-thumbnail",
+  "version": "1.0.0",
+  "description": "Using ffmpeg generate thumbnail from video file",
+  "main": "index.js",
+  "bin": {
+    "generate-thumbnail": "./bin/generate-thumbnail"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bang88/generate-thumbnail.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bang88/generate-thumbnail/issues"
+  },
+  "homepage": "https://github.com/bang88/generate-thumbnail#readme",
+  "dependencies": {
+    "commander": "^2.9.0",
+    "fluent-ffmpeg": "^2.1.0",
+    "mkdirp": "^0.5.1",
+    "sharp": "^0.16.1"
+  }
+}

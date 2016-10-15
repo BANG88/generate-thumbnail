@@ -1,0 +1,25 @@
+#!/usr/bin/env node
+
+var program = require('commander')
+var gt = require('../')
+
+program
+  .version('0.0.1')
+  .option('-O, --output <path>', 'set the video thumbnails output directory')  
+  .option('-M, --timemarks <["1","10%"]>', 'set the thumbnails time marks')  
+
+program
+  .command('g')
+  .description('generate thumbnails from Input video files')
+  .option('-I, --input <path>', 'set the video directory')  
+  .action(function (env,options) {   
+    gt(env.input,options)
+  })
+
+program
+  .command('*')
+  .action(function (env) {
+    console.log('Command "%s" not found.', env)
+  })
+
+program.parse(process.argv)
