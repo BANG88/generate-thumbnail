@@ -13,9 +13,18 @@
     "type": "git",
     "url": "git+https://github.com/bang88/generate-thumbnail.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "files": [
+    "index.js",
+    "bin",
+    "README.md",
+    "yarn.lock"
+  ],
+  "keywords": [
+    "ffmpeg",
+    "thumbnail"
+  ],
+  "author": "bang88",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/bang88/generate-thumbnail/issues"
   },
