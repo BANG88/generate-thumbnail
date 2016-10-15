@@ -24,11 +24,13 @@ function createFolder (folder) {
  */
 function generateThumbnail (inputFile, options) {
   options = options || {
-    output: './thumbnail/' + path.basename(inputFile, path.extname(inputFile)) + '/',
-    timemarks: ['10%', '20%', '30%', '40%', '50%', '60%', '70%', '90%']
+
   }
 
-  var folder = options.output
+  options.output = options.output || './thumbnail'
+  options.timemarks = options.timemarks || ['10%', '20%', '30%', '40%', '50%', '60%', '70%', '90%']
+
+  var folder = options.output + '/' + path.basename(inputFile, path.extname(inputFile)) + '/'
 
   var timemarks = options.timemarks
 
@@ -46,23 +48,23 @@ function generateThumbnail (inputFile, options) {
     })
     .on('end', function () {
       filenameCached.forEach(function (filename) {
-        var image = sharp(`${folder}/${filename}`)
+        var image = sharp(folder + '/' + filename)
         image
           .metadata()
           .then(function (md) {
-            var thumbnailFolder = `${folder}thumbnail`
+            var thumbnailFolder = folder + '/' + 'thumbnail'
             createFolder(thumbnailFolder)
             return image
               .resize(Math.round(md.width / 2))
               // .webp()
-              .toFile(`${thumbnailFolder}/${filename}`)
+              .toFile(thumbnailFolder + '/' + filename)
           })
           .then(function (data) {
             // data contains a WebP image half the width and height of the original JPEG
           })
       })
 
-      console.log('screenshots were saved')
+      console.log(inputFile + ' screenshots were saved')
     })
     .on('error', function (err) {
       console.log('an error happened: ' + err.message)
@@ -72,15 +74,25 @@ function generateThumbnail (inputFile, options) {
       count: timemarks.length,
       timemarks: timemarks,
       filename: 'thumb.png',
-      size: `100%`,
+      size: '100%',
       folder: folder
     })
 }
 
 module.exports = function (inputFile, options) {
+  if (fs.lstatSync(inputFile).isDirectory()) {
+    var files = fs.readdirSync(inputFile)
+    inputFile = files.filter(function (input) {
+      return fs.lstatSync(inputFile + '/' + input).isFile()
+    }).map(function (input) {
+      return inputFile + '/' + input
+    })
+    console.log('Input files: ', inputFile)
+  }
+
   if (Array.isArray(inputFile)) {
-    Array.forEach(function (inputFile) {
-      generateThumbnail(inputFile, options)
+    inputFile.forEach(function (input) {
+      generateThumbnail(input, options)
     })
   }else {
     generateThumbnail(inputFile, options)

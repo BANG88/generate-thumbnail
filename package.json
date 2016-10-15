@@ -30,6 +30,7 @@
   },
   "homepage": "https://github.com/bang88/generate-thumbnail#readme",
   "dependencies": {
+    "@types/node": "^6.0.45",
     "commander": "^2.9.0",
     "fluent-ffmpeg": "^2.1.0",
     "mkdirp": "^0.5.1",
